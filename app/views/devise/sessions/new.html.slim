@@ -1,0 +1,18 @@
+- content_for :title do
+  = "Вход"
+h2 Вход
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .grid-x.grid-padding-x.align-center
+    .medium-6.cell
+      .input-group
+        span.input-group-label Имя пользователя
+        = f.text_field :login, autofocus: true, autocomplete: "login", class: 'input-group-field'
+      .input-group
+        span.input-group-label Пароль
+        = f.password_field :password, autocomplete: "off", class: 'input-group-field'
+      - if devise_mapping.rememberable?
+        = f.check_box :remember_me
+        = f.label :remember_me, 'Запомнить меня'
+      .actions
+        = f.submit "Отправить", class: 'button'
+= render "devise/shared/links"
