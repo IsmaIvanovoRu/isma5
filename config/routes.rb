@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  
+  root 'welcome#index'
+  
+  resources :users do
+    resource :profile do
+      member do
+        put :published_toggle
+      end
+    end
+    collection do
+      post :import
+    end
+  end
+  
+  resources :groups
 end

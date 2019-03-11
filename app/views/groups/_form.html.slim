@@ -1,0 +1,21 @@
+= form_for @group, html: { class: 'form-horizontal' } do |f|
+  .grid-x.grid-padding-x.align-center
+    .medium-6.cell
+      .input-group
+        span.input-group-label= f.label :name
+        = f.text_field :name, class: 'input-group-field'
+      .input-group
+        span.input-group-label= f.label 'parent_id'
+        = f.select :parent_id, options_for_select = @groups.collect {|p| [t(p.name, scope: [:groups]), p.id] }, {include_blank: ''}, class: 'input-group-field'
+      fieldset
+        = f.check_box :administrator
+        = f.label :administrator
+        = f.check_box :moderator
+        = f.label :moderator
+        = f.check_box :writer
+        = f.label :writer
+        = f.check_box :reader
+        = f.label :reader
+      .form-actions
+        = f.submit nil, class: 'button tiny'
+        = link_to t('.cancel', :default => t("helpers.links.cancel")), groups_path, class: 'button tiny'

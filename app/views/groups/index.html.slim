@@ -1,0 +1,24 @@
+.page-header
+  h1 Группы
+table
+  thead
+    tr
+      th Название
+      th Администратор
+      th Модератор
+      th Писатель
+      th Читатель
+      th Действия
+  tbody
+    - @groups.each do |group|
+      tr
+        td= link_to t(group.name, scope: :groups), group_path(group)
+        td= group.administrator? ? "+" : "-"
+        td= group.moderator? ? "+" : "-"
+        td= group.writer ? "+" : "-"
+        td= group.reader? ? "+" : "-"
+        td
+          = link_to 'Редактировать', edit_group_path(group), class: 'btn btn-mini'
+          span &nbsp|&nbsp
+          = link_to 'Удалить', group_path(group), method: :delete, data: {confirm: 'Уверены?'}, class: 'btn btn-mini btn-danger'
+= link_to 'Добавить группу', new_group_path, class: 'button tiny'
